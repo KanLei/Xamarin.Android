@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent">
+    <LinearLayout
+        p1:orientation="horizontal"
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent">
+        <SurfaceView
+            p1:layout_weight="1"
+            p1:layout_width="0dp"
+            p1:layout_height="match_parent"
+            p1:id="@+id/crime_camera_surfaceView" />
+        <Button
+            p1:text="@string/take"
+            p1:layout_width="wrap_content"
+            p1:layout_height="match_parent"
+            p1:id="@+id/crime_camera_takePictureButton" />
+    </LinearLayout>
+    <FrameLayout
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:id="@+id/crime_camera_progressContainer"
+        p1:clickable="true">
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            p1:layout_width="wrap_content"
+            p1:layout_height="wrap_content"
+            p1:layout_gravity="center" />
+    </FrameLayout>
+</FrameLayout>

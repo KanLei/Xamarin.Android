@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">你好月球</string>
+  <string name="hellomoon_play">播放</string>
+  <string name="hellomoon_stop">停止</string>
+  <string name="hellomoon_pause">暂停</string>
+  <string name="hellomoon_description">Neil Armstrong stepping onto the moon</string>
+</resources>
