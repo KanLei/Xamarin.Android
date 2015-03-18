@@ -17,6 +17,9 @@ using System.Diagnostics;
 using Android.Content.PM;
 using Android.Hardware;
 using Android.Graphics.Drawables;
+using Android.Text.Format;
+using Android.Provider;
+using Android.Database;
 
 namespace CriminalIntent
 {
@@ -31,6 +34,7 @@ namespace CriminalIntent
         private const int REQUEST_DATE = 0;
         private const int REQUEST_TIME = 1;
         private const int REQUEST_PHOTO = 2;
+        private const int REQUEST_CONTACT = 3;
 
         private Crime crime;
 
@@ -39,6 +43,7 @@ namespace CriminalIntent
         private CheckBox solvedCheckBox;
         private ImageButton photoButton;
         private ImageView photoView;
+        private Button suspectButton;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -114,6 +119,28 @@ namespace CriminalIntent
                 fragment.Show(Activity.FragmentManager, DIALOG_IMAGE);
             };
 
+            var reportButton = v.FindViewById<Button>(Resource.Id.crime_reportButton);
+            reportButton.Click += (s, e) =>
+            {
+                var i = new Intent(Intent.ActionSend);
+                i.SetType("text/plain");
+                i.PutExtra(Intent.ExtraText, GetCrimeReport());
+                i.PutExtra(Intent.ExtraSubject, GetString(Resource.String.crime_report_subject));
+                i = Intent.CreateChooser(i, GetString(Resource.String.send_report));
+                StartActivity(i);
+            };
+
+            suspectButton = v.FindViewById<Button>(Resource.Id.crime_suspectButton);
+            suspectButton.Click += (s, e) =>
+            {
+                var i = new Intent(Intent.ActionPick, ContactsContract.Contacts.ContentUri);
+                StartActivityForResult(i, REQUEST_CONTACT);
+            };
+
+            if (crime.Suspect != null)
+                suspectButton.Text = crime.Suspect;
+
+
             // If camera is not available, disable camera functionality
             PackageManager pm = Activity.PackageManager;
             bool hasACamera = pm.HasSystemFeature(PackageManager.FeatureCamera) ||
@@ -121,6 +148,14 @@ namespace CriminalIntent
                 (Build.VERSION.SdkInt >= BuildVersionCodes.Gingerbread && Camera.NumberOfCameras > 0);
             if (!hasACamera)
                 photoButton.Enabled = false;
+
+            // If activities available
+            IList<ResolveInfo> resolvers = pm.QueryIntentActivities(new Intent(Intent.ActionPick, ContactsContract.Contacts.ContentUri), 0);
+            suspectButton.Enabled = resolvers.Count > 0;
+            var intent = new Intent(Intent.ActionSend);
+            intent.SetType("text/plain");
+            resolvers = pm.QueryIntentActivities(intent, 0);
+            reportButton.Enabled = resolvers.Count > 0;
             return v;
         }
 
@@ -180,8 +215,17 @@ namespace CriminalIntent
             switch (item.ItemId)
             {
                 case Resource.Id.menu_item_delete_crime_fragment:
-                    CrimeLab.Get(Activity).Remove(crime);
-                    BackToCrimeListActivity();
+
+                    var dialog = new AlertDialog.Builder(Activity)
+                        .SetTitle("Do you want to delete this crime?")
+                        .SetPositiveButton(Android.Resource.String.Ok, delegate
+                        {
+                            CrimeLab.Get(Activity).Remove(crime);
+                            BackToCrimeListActivity();
+                        })
+                        .SetNegativeButton(Android.Resource.String.Cancel, delegate { })
+                        .Show();
+
                     return true;
                 case Android.Resource.Id.Home:
                     BackToCrimeListActivity();
@@ -239,10 +283,35 @@ namespace CriminalIntent
                     crime.Date.Seconds = 0;
                     break;
                 case REQUEST_PHOTO:
+                    // 删除原始图片
+                    if (crime.CrimePhoto != null)
+                    {
+                        string path = Activity.GetFileStreamPath(crime.CrimePhoto.PhotoName).AbsolutePath;
+                        PictureUtils.DeleteImageFromFile(path);
+                    }
+
                     var photoName = data.GetStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
                     var photo = new Photo(photoName);
                     crime.CrimePhoto = photo;
-                    //ShowPhoto();  延迟在 OnStart 中调用
+                    ShowPhoto();
+                    break;
+                case REQUEST_CONTACT:
+                    Android.Net.Uri contactUri = data.Data;
+                    string[] queryFields = { ContactsContract.Contacts.InterfaceConsts.DisplayName };
+                    ICursor cursor = Activity.ContentResolver.Query(contactUri, queryFields, null, null, null);
+
+                    // double-check
+                    if (cursor.Count == 0)
+                    {
+                        cursor.Close();
+                        return;
+                    }
+
+                    cursor.MoveToFirst();
+                    string name = cursor.GetString(cursor.GetColumnIndex(queryFields[0]));
+                    crime.Suspect = name;
+                    suspectButton.Text = name;
+                    cursor.Close();
                     break;
                 default:
                     break;
@@ -264,6 +333,30 @@ namespace CriminalIntent
             crimeFragment.Arguments = bundle;
 
             return crimeFragment;
+        }
+
+
+        private string GetCrimeReport()
+        {
+            string solvedString = null;
+            if (crime.Solved)
+                solvedString = GetString(Resource.String.crime_report_solved);
+            else
+                solvedString = GetString(Resource.String.crime_report_unsolved);
+
+            string dateFormat = "EEE, MMM dd";
+            string dateString = DateFormat.Format(dateFormat, crime.Date).ToString();
+
+            string suspect = crime.Suspect;
+            if (suspect == null)
+                suspect = GetString(Resource.String.crime_report_no_suspect);
+            else
+                suspect = GetString(Resource.String.crime_report_suspect, suspect);
+
+            string report = GetString(Resource.String.crime_report, crime.Title,
+                dateString, solvedString, suspect);
+
+            return report;
         }
 
     }

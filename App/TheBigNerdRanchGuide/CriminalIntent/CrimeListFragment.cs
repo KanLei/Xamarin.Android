@@ -26,7 +26,7 @@ namespace CriminalIntent
             RetainInstance = true;
             HasOptionsMenu = true;
 
-            Activity.SetTitle(Resource.String.crimes_title);
+            //Activity.SetTitle(Resource.String.crimes_title);
             // Create your fragment here
             JavaList<Crime> crimes = CrimeLab.Get(Activity).Crimes;
 

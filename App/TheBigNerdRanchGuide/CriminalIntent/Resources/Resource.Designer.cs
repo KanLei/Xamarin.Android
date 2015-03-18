@@ -1171,14 +1171,14 @@ namespace CriminalIntent
 			// aapt resource value: 0x7f080018
 			public const int collapseActionView = 2131230744;
 			
-			// aapt resource value: 0x7f080049
-			public const int crime_camera_progressContainer = 2131230793;
+			// aapt resource value: 0x7f08004c
+			public const int crime_camera_progressContainer = 2131230796;
 			
-			// aapt resource value: 0x7f080047
-			public const int crime_camera_surfaceView = 2131230791;
+			// aapt resource value: 0x7f08004a
+			public const int crime_camera_surfaceView = 2131230794;
 			
-			// aapt resource value: 0x7f080048
-			public const int crime_camera_takePictureButton = 2131230792;
+			// aapt resource value: 0x7f08004b
+			public const int crime_camera_takePictureButton = 2131230795;
 			
 			// aapt resource value: 0x7f080045
 			public const int crime_date = 2131230789;
@@ -1189,17 +1189,23 @@ namespace CriminalIntent
 			// aapt resource value: 0x7f080042
 			public const int crime_imageView = 2131230786;
 			
-			// aapt resource value: 0x7f08004c
-			public const int crime_list_item_dateTextView = 2131230796;
+			// aapt resource value: 0x7f08004f
+			public const int crime_list_item_dateTextView = 2131230799;
 			
-			// aapt resource value: 0x7f08004a
-			public const int crime_list_item_solvedCheckBox = 2131230794;
+			// aapt resource value: 0x7f08004d
+			public const int crime_list_item_solvedCheckBox = 2131230797;
 			
-			// aapt resource value: 0x7f08004b
-			public const int crime_list_item_titleTextView = 2131230795;
+			// aapt resource value: 0x7f08004e
+			public const int crime_list_item_titleTextView = 2131230798;
+			
+			// aapt resource value: 0x7f080048
+			public const int crime_reportButton = 2131230792;
 			
 			// aapt resource value: 0x7f080046
 			public const int crime_solved = 2131230790;
+			
+			// aapt resource value: 0x7f080047
+			public const int crime_suspectButton = 2131230791;
 			
 			// aapt resource value: 0x7f080044
 			public const int crime_title = 2131230788;
@@ -1252,23 +1258,26 @@ namespace CriminalIntent
 			// aapt resource value: 0x7f080024
 			public const int image = 2131230756;
 			
+			// aapt resource value: 0x7f080049
+			public const int linearLayout1 = 2131230793;
+			
 			// aapt resource value: 0x7f08000a
 			public const int listMode = 2131230730;
 			
 			// aapt resource value: 0x7f080026
 			public const int list_item = 2131230758;
 			
-			// aapt resource value: 0x7f08004f
-			public const int menu_item_delete_crime = 2131230799;
+			// aapt resource value: 0x7f080052
+			public const int menu_item_delete_crime = 2131230802;
+			
+			// aapt resource value: 0x7f080053
+			public const int menu_item_delete_crime_fragment = 2131230803;
 			
 			// aapt resource value: 0x7f080050
-			public const int menu_item_delete_crime_fragment = 2131230800;
+			public const int menu_item_new_crime = 2131230800;
 			
-			// aapt resource value: 0x7f08004d
-			public const int menu_item_new_crime = 2131230797;
-			
-			// aapt resource value: 0x7f08004e
-			public const int menu_item_show_subtitle = 2131230798;
+			// aapt resource value: 0x7f080051
+			public const int menu_item_show_subtitle = 2131230801;
 			
 			// aapt resource value: 0x7f080016
 			public const int middle = 2131230742;
@@ -1565,8 +1574,32 @@ namespace CriminalIntent
 			// aapt resource value: 0x7f0a0013
 			public const int crime_details_label = 2131361811;
 			
+			// aapt resource value: 0x7f0a001f
+			public const int crime_report = 2131361823;
+			
+			// aapt resource value: 0x7f0a0022
+			public const int crime_report_no_suspect = 2131361826;
+			
+			// aapt resource value: 0x7f0a0020
+			public const int crime_report_solved = 2131361824;
+			
+			// aapt resource value: 0x7f0a0024
+			public const int crime_report_subject = 2131361828;
+			
+			// aapt resource value: 0x7f0a0023
+			public const int crime_report_suspect = 2131361827;
+			
+			// aapt resource value: 0x7f0a001e
+			public const int crime_report_text = 2131361822;
+			
+			// aapt resource value: 0x7f0a0021
+			public const int crime_report_unsolved = 2131361825;
+			
 			// aapt resource value: 0x7f0a0014
 			public const int crime_solved_label = 2131361812;
+			
+			// aapt resource value: 0x7f0a001d
+			public const int crime_suspect_text = 2131361821;
 			
 			// aapt resource value: 0x7f0a0011
 			public const int crime_title_hint = 2131361809;
@@ -1588,6 +1621,9 @@ namespace CriminalIntent
 			
 			// aapt resource value: 0x7f0a0017
 			public const int new_crime = 2131361815;
+			
+			// aapt resource value: 0x7f0a0025
+			public const int send_report = 2131361829;
 			
 			// aapt resource value: 0x7f0a0018
 			public const int show_subtitle = 2131361816;

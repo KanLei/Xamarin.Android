@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace CriminalIntent
 {
-    [Activity(Label = "CrimeListActivity", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Crimes", MainLauncher = true, Icon = "@drawable/icon")]
     public class CrimeListActivity : SingleFragmentActivity
     {
         // 从基类继承 OnCreate() 方法，并调用

@@ -21,6 +21,7 @@ namespace CriminalIntent
         public string Title { get; set; }
         public bool Solved { get; set; }
         public Photo CrimePhoto { get; set; }
+        public string Suspect { get; set; }
 
         public Crime()
         {

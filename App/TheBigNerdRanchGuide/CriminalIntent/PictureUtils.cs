@@ -12,11 +12,13 @@ using Android.Widget;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace CriminalIntent
 {
     class PictureUtils
     {
+        // 缩放图片大小
         public static BitmapDrawable GetScaledDrawable(Activity activity, string path, bool scale = true)
         {
             Display display = activity.WindowManager.DefaultDisplay;
@@ -53,6 +55,7 @@ namespace CriminalIntent
             return new BitmapDrawable(activity.Resources, bitmap);
         }
 
+        // 释放图片资源
         public static void CleanImageView(ImageView imageView)
         {
             // Clean up the view's image for the sake of memory
@@ -62,6 +65,12 @@ namespace CriminalIntent
                 b.Bitmap.Recycle();
                 imageView.SetImageDrawable(null);
             }
+        }
+
+        // 删除图片文件
+        public static void DeleteImageFromFile(string path)
+        {
+            File.Delete(path);
         }
     }
 }

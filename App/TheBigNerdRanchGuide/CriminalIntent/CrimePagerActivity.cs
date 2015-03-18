@@ -16,11 +16,12 @@ using Android.Support.V4.App;
 namespace CriminalIntent
 {
     [Activity(Label = "CrimePagerActivity")]
-    [MetaData("android.support.PARENT_ACTIVITY", Value = "CriminalIntent.CrimeListActivity")]
+    //[MetaData("android.support.PARENT_ACTIVITY", Value = "criminalintent.CrimeListActivity")]  // 注意项目名小写
     public class CrimePagerActivity : FragmentActivity
     {
         private ViewPager viewPager;
         private JavaList<Crime> crimes;
+
 
         protected override void OnCreate(Bundle bundle)
         {

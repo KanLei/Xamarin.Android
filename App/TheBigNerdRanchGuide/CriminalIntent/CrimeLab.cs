@@ -53,6 +53,12 @@ namespace CriminalIntent
 
         public void Remove(Crime c)
         {
+            // É¾³ýÍ¼Æ¬ÎÄ¼þ
+            if (c.CrimePhoto != null)
+            {
+                string path = appContext.GetFileStreamPath(c.CrimePhoto.PhotoName).AbsolutePath;
+                PictureUtils.DeleteImageFromFile(path);
+            }
             Crimes.Remove(c);
         }
 
