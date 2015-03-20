@@ -38,11 +38,11 @@ namespace CriminalIntent
             {
                 if (srcWidth > srcHeight)
                 {
-                    inSampleSize = (int)(srcHeight / destHeight); // 是原始图像的几倍，就缩小几倍
+                    inSampleSize = (int)Math.Round((srcHeight / destHeight)); // 是原始图像的几倍，就缩小几倍
                 }
                 else
                 {
-                    inSampleSize = (int)(srcWidth / destWidth);
+                    inSampleSize = (int)Math.Round((srcWidth / destWidth));
                 }
 
             }

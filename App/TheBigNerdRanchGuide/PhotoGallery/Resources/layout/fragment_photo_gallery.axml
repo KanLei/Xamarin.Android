@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:columnWidth="120dp"
+    p1:numColumns="auto_fit"
+    p1:stretchMode="columnWidth"
+    p1:id="@+id/gridView" />

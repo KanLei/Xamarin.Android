@@ -275,12 +275,14 @@ namespace CriminalIntent
                     date.Seconds = crime.Date.Seconds;
                     crime.Date = date;
                     //crime.Date = date;
+                    UpdateDate();
                     break;
                 case REQUEST_TIME:
                     var time = (Date)data.GetSerializableExtra(DatePickerFragment.EXTRA_DATE);
                     crime.Date.Hours = time.Hours;
                     crime.Date.Minutes = time.Minutes;
                     crime.Date.Seconds = 0;
+                    UpdateDate();
                     break;
                 case REQUEST_PHOTO:
                     // ɾ��ԭʼͼƬ
@@ -316,7 +318,6 @@ namespace CriminalIntent
                 default:
                     break;
             }
-            UpdateDate();
         }
 
         private void UpdateDate()

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/fragment_remote_control_tableLayout"
+    p1:background="@drawable/remote_background"
+    p1:stretchColumns="*">
+    <TextView
+        p1:text="0"
+        p1:layout_column="0"
+        p1:id="@+id/fragment_remote_control_selectedTextView"
+        p1:layout_width="match_parent"
+        p1:layout_height="0dp"
+        p1:layout_weight="2"
+        p1:background="@drawable/window_patch"
+        p1:gravity="center"
+        p1:textColor="#ffffff"
+        p1:textSize="50sp" />
+    <TextView
+        p1:text="0"
+        p1:id="@+id/fragment_remote_control_workingTextView"
+        p1:layout_weight="1"
+        p1:layout_height="0dp"
+        p1:layout_width="match_parent"
+        p1:layout_margin="15dp"
+        p1:background="@drawable/bar_patch"
+        p1:gravity="center"
+        p1:textStyle="italic"
+        p1:textColor="#00000000"
+        p1:textSize="20sp" />
+    <include
+        p1:layout_weight="1"
+        layout="@layout/button_row" />
+    <include
+        p1:layout_weight="1"
+        layout="@layout/button_row" />
+    <include
+        p1:layout_weight="1"
+        layout="@layout/button_row" />
+    <TableRow
+        p1:layout_weight="1">
+        <Button
+            p1:id="@+id/deleteButton"
+            style="@style/SpecialButton" />
+        <Button
+            p1:id="@+id/zeroButton"
+            style="@style/RemoteButton" />
+        <Button
+            p1:id="@+id/enterButton"
+            style="@style/SpecialButton" />
+    </TableRow>
+</TableLayout>

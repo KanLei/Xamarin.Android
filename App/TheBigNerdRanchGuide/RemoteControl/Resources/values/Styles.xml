@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="RemoteButton">
+    <item name="android:layout_width">0dp</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:textColor">@drawable/button_text_color</item>
+    <item name="android:textSize">20dp</item>
+    <item name="android:layout_margin">3dp</item>
+    <item name="android:background">@drawable/button_shape_shadowed</item>
+  </style>
+
+  <style name="SpecialButton" parent="@style/RemoteButton">
+    <item name="android:textStyle">bold</item>
+    <item name="android:textColor">#999999</item>
+  </style>
+</resources>
