@@ -23,216 +23,210 @@ using Android.Database;
 
 namespace CriminalIntent
 {
-    public class CrimeFragment : Android.Support.V4.App.Fragment
-    {
-        public const string EXTRA_CRIME_ID = "CriminalIntent.Crime_ID";
-        public const string DIALOG_DATE = "dialog_date";
-        public const string DIALOG_TIME = "dialog_time";
+	public class CrimeFragment : Android.Support.V4.App.Fragment
+	{
+		public const string EXTRA_CRIME_ID = "CriminalIntent.Crime_ID";
+		public const string DIALOG_DATE = "dialog_date";
+		public const string DIALOG_TIME = "dialog_time";
 
-        private const string DIALOG_IMAGE = "image";
+		private const string DIALOG_IMAGE = "image";
 
-        private const int REQUEST_DATE = 0;
-        private const int REQUEST_TIME = 1;
-        private const int REQUEST_PHOTO = 2;
-        private const int REQUEST_CONTACT = 3;
+		private const int REQUEST_DATE = 0;
+		private const int REQUEST_TIME = 1;
+		private const int REQUEST_PHOTO = 2;
+		private const int REQUEST_CONTACT = 3;
 
-        private Crime crime;
+		private Crime crime;
 
-        private EditText titleEditText;
-        private Button dateButton;
-        private CheckBox solvedCheckBox;
-        private ImageButton photoButton;
-        private ImageView photoView;
-        private Button suspectButton;
+		private EditText titleEditText;
+		private Button dateButton;
+		private CheckBox solvedCheckBox;
+		private ImageButton photoButton;
+		private ImageView photoView;
+		private Button suspectButton;
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
+		public override void OnCreate (Bundle savedInstanceState)
+		{
+			base.OnCreate (savedInstanceState);
 
-            HasOptionsMenu = true;  // 2
-            //crime = new Crime();
-            // 从 Activity 获取 Intent
-            //var crimeId = (UUID)Activity.Intent.GetSerializableExtra(EXTRA_CRIME_ID);
-            var crimeId = (UUID)Arguments.GetSerializable(EXTRA_CRIME_ID);
-            crime = CrimeLab.Get(Activity).GetCrime(crimeId);
+			HasOptionsMenu = true;  // 2
+			//crime = new Crime();
+			// 从 Activity 获取 Intent
+			//var crimeId = (UUID)Activity.Intent.GetSerializableExtra(EXTRA_CRIME_ID);
+			var crimeId = (UUID)Arguments.GetSerializable (EXTRA_CRIME_ID);
+			crime = CrimeLab.Get (Activity).GetCrime (crimeId);
 
-            RetainInstance = true;  // 当把手机转向时，不会再调用 OnCreate，直接调用 OnCreateView
-        }
+			RetainInstance = true;  // 当把手机转向时，不会再调用 OnCreate，直接调用 OnCreateView
 
-        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-        {
-            View v = inflater.Inflate(Resource.Layout.fragment_crime, container, false);
+			//ShowPhoto ();
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Honeycomb)
-                Activity.ActionBar.SetDisplayHomeAsUpEnabled(true);  // 1
+		}
 
-            titleEditText = v.FindViewById<EditText>(Resource.Id.crime_title);
-            titleEditText.Text = crime.Title;
-            titleEditText.TextChanged += (s, e) =>
-            {
-                crime.Title = e.Text.ToString();
-            };
+		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		{
+			View v = inflater.Inflate (Resource.Layout.fragment_crime, container, false);
 
-            dateButton = v.FindViewById<Button>(Resource.Id.crime_date);
-            //dateButton.Enabled = false;
-            UpdateDate();
-            dateButton.Click += (s, e) =>
-            {
-                int i = 0;
-                new AlertDialog.Builder(Activity)
-                    .SetTitle("Change Date or Time?")
-                    .SetSingleChoiceItems(new string[] { "Date", "Time" }, 0, (sender, args) =>
-                    {
-                        i = args.Which;
-                    })
-                    .SetPositiveButton(Android.Resource.String.Ok, delegate { ShowDataPickerFragment(i); })
-                    .SetNegativeButton(Android.Resource.String.Cancel, delegate { })
-                    .Create().Show();
+			if (Build.VERSION.SdkInt >= BuildVersionCodes.Honeycomb)
+				Activity.ActionBar.SetDisplayHomeAsUpEnabled (true);  // 1
 
-                //var datePicker = new DatePickerFragment(crime.Date);
-                //datePicker.SetTargetFragment(this, REQUEST_DATE);  // 实现 Fragment 与 Fragment 之间的回传
-                //datePicker.Show(Activity.SupportFragmentManager, DIALOG_DATE);
-            };
+			titleEditText = v.FindViewById<EditText> (Resource.Id.crime_title);
+			titleEditText.Text = crime.Title;
+			titleEditText.TextChanged += (s, e) => {
+				crime.Title = e.Text.ToString ();
+			};
 
-            solvedCheckBox = v.FindViewById<CheckBox>(Resource.Id.crime_solved);
-            solvedCheckBox.Checked = crime.Solved;
-            solvedCheckBox.CheckedChange += (s, e) =>
-            {
-                crime.Solved = e.IsChecked;
-            };
+			dateButton = v.FindViewById<Button> (Resource.Id.crime_date);
+			//dateButton.Enabled = false;
+			UpdateDate ();
+			dateButton.Click += (s, e) => {
+				int i = 0;
+				new AlertDialog.Builder (Activity)
+                    .SetTitle ("Change Date or Time?")
+                    .SetSingleChoiceItems (new string[] { "Date", "Time" }, 0, (sender, args) => {
+					i = args.Which;
+				})
+                    .SetPositiveButton (Android.Resource.String.Ok, delegate {
+					ShowDataPickerFragment (i);
+				})
+                    .SetNegativeButton (Android.Resource.String.Cancel, delegate {
+				})
+                    .Create ().Show ();
 
-            photoButton = v.FindViewById<ImageButton>(Resource.Id.crime_imageButton);
-            photoButton.Click += (s, e) =>
-            {
-                var i = new Intent(Activity, typeof(CrimeCameraActivity));
-                StartActivityForResult(i, REQUEST_PHOTO);
-            };
+				//var datePicker = new DatePickerFragment(crime.Date);
+				//datePicker.SetTargetFragment(this, REQUEST_DATE);  // 实现 Fragment 与 Fragment 之间的回传
+				//datePicker.Show(Activity.SupportFragmentManager, DIALOG_DATE);
+			};
 
-            photoView = v.FindViewById<ImageView>(Resource.Id.crime_imageView);
-            photoView.Click += (s, e) =>
-            {
-                Photo p = crime.CrimePhoto;
-                if (p == null) return;
+			solvedCheckBox = v.FindViewById<CheckBox> (Resource.Id.crime_solved);
+			solvedCheckBox.Checked = crime.Solved;
+			solvedCheckBox.CheckedChange += (s, e) => {
+				crime.Solved = e.IsChecked;
+			};
 
-                string path = Activity.GetFileStreamPath(p.PhotoName).AbsolutePath;
-                var fragment = ImageFragment.NewInstance(path);
-                fragment.Show(Activity.FragmentManager, DIALOG_IMAGE);
-            };
+			photoButton = v.FindViewById<ImageButton> (Resource.Id.crime_imageButton);
+			photoButton.Click += (s, e) => {
+				var i = new Intent (Activity, typeof(CrimeCameraActivity));
+				StartActivityForResult (i, REQUEST_PHOTO);
+			};
 
-            var reportButton = v.FindViewById<Button>(Resource.Id.crime_reportButton);
-            reportButton.Click += (s, e) =>
-            {
-                var i = new Intent(Intent.ActionSend);
-                i.SetType("text/plain");
-                i.PutExtra(Intent.ExtraText, GetCrimeReport());
-                i.PutExtra(Intent.ExtraSubject, GetString(Resource.String.crime_report_subject));
-                i = Intent.CreateChooser(i, GetString(Resource.String.send_report));
-                StartActivity(i);
-            };
+			photoView = v.FindViewById<ImageView> (Resource.Id.crime_imageView);
+			photoView.Click += (s, e) => {
+				Photo p = crime.CrimePhoto;
+				if (p == null)
+					return;
 
-            suspectButton = v.FindViewById<Button>(Resource.Id.crime_suspectButton);
-            suspectButton.Click += (s, e) =>
-            {
-                var i = new Intent(Intent.ActionPick, ContactsContract.Contacts.ContentUri);
-                StartActivityForResult(i, REQUEST_CONTACT);
-            };
+				string path = Activity.GetFileStreamPath (p.PhotoName).AbsolutePath;
+				var fragment = ImageFragment.NewInstance (path);
+				fragment.Show (Activity.FragmentManager, DIALOG_IMAGE);
+			};
 
-            if (crime.Suspect != null)
-                suspectButton.Text = crime.Suspect;
+			var reportButton = v.FindViewById<Button> (Resource.Id.crime_reportButton);
+			reportButton.Click += (s, e) => {
+				var i = new Intent (Intent.ActionSend);
+				i.SetType ("text/plain");
+				i.PutExtra (Intent.ExtraText, GetCrimeReport ());
+				i.PutExtra (Intent.ExtraSubject, GetString (Resource.String.crime_report_subject));
+				i = Intent.CreateChooser (i, GetString (Resource.String.send_report));
+				StartActivity (i);
+			};
+
+			suspectButton = v.FindViewById<Button> (Resource.Id.crime_suspectButton);
+			suspectButton.Click += (s, e) => {
+				var i = new Intent (Intent.ActionPick, ContactsContract.Contacts.ContentUri);
+				StartActivityForResult (i, REQUEST_CONTACT);
+			};
+
+			if (crime.Suspect != null)
+				suspectButton.Text = crime.Suspect;
 
 
-            // If camera is not available, disable camera functionality
-            PackageManager pm = Activity.PackageManager;
-            bool hasACamera = pm.HasSystemFeature(PackageManager.FeatureCamera) ||
-                pm.HasSystemFeature(PackageManager.FeatureCameraFront) ||
-                (Build.VERSION.SdkInt >= BuildVersionCodes.Gingerbread && Camera.NumberOfCameras > 0);
-            if (!hasACamera)
-                photoButton.Enabled = false;
+			// If camera is not available, disable camera functionality
+			PackageManager pm = Activity.PackageManager;
+			bool hasACamera = pm.HasSystemFeature (PackageManager.FeatureCamera) ||
+			                           pm.HasSystemFeature (PackageManager.FeatureCameraFront) ||
+			                           (Build.VERSION.SdkInt >= BuildVersionCodes.Gingerbread && Camera.NumberOfCameras > 0);
+			if (!hasACamera)
+				photoButton.Enabled = false;
 
-            // If activities available
+			// If activities available
 //            IList<ResolveInfo> resolvers = pm.QueryIntentActivities(new Intent(Intent.ActionPick, ContactsContract.Contacts.ContentUri), 0);
 //            suspectButton.Enabled = resolvers.Count > 0;
 			var contactsIntent = new Intent (Intent.ActionPick, ContactsContract.Contacts.ContentUri);
 			suspectButton.Enabled = contactsIntent.ResolveActivity (pm) != null ? true : false;
-            var sendIntent = new Intent(Intent.ActionSend);
-			sendIntent.SetType("text/plain");
+			var sendIntent = new Intent (Intent.ActionSend);
+			sendIntent.SetType ("text/plain");
 //            resolvers = pm.QueryIntentActivities(intent, 0);
 //            reportButton.Enabled = resolvers.Count > 0;
 			// 这种查询方式更优
 			reportButton.Enabled = sendIntent.ResolveActivity (pm) != null ? true : false;
-            return v;
-        }
 
-        public override void OnStart()
-        {
-            base.OnStart();
+			return v;
+		}
 
-            ShowPhoto();
-        }
+		public override async void OnStart ()
+		{
+			base.OnStart ();
 
-        public override void OnStop()
-        {
-            base.OnStop();
+			await ShowPhoto ().ConfigureAwait (false);
+		}
 
-            PictureUtils.CleanImageView(photoView);
-        }
+		private async Task ShowPhoto ()
+		{
+			Photo p = crime.CrimePhoto;
+			BitmapDrawable b = null;
+			if (p != null) {
+				try {
+					string path = Activity.GetFileStreamPath (p.PhotoName).AbsolutePath;
+				b = await PictureUtils.GetScaledDrawableAsync (Activity, path).ConfigureAwait (false);  //.ConfigureAwait(false); 下面访问 photoView
+				} catch (Exception ex) {
+					Toast.MakeText (Activity, "ShowPhoto Error" + ex.Message, ToastLength.Long).Show ();
+				}
+			}
 
-        private void ShowPhoto()
-        {
-            Photo p = crime.CrimePhoto;
-            BitmapDrawable b = null;
-            try
-            {
-                if (p != null)
-                {
-                    string path = Activity.GetFileStreamPath(p.PhotoName).AbsolutePath;
-                    b = PictureUtils.GetScaledDrawable(Activity, path);  //.ConfigureAwait(false); 下面访问 photoView
-                }
-                photoView.SetImageDrawable(b);
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
-
-        }
+			Activity.RunOnUiThread (() => photoView.SetImageDrawable (b));
+			
+		}
 
 
-        public override async void OnPause()
-        {
-            base.OnPause();
+		public override async void OnPause ()
+		{
+			base.OnPause ();
 
-            await CrimeLab.Get(Activity).SaveCrimesAsync().ConfigureAwait(false);
-        }
+			await CrimeLab.Get (Activity).SaveCrimesAsync ();
+		}
 
+		public override void OnStop ()
+		{
+			base.OnStop ();
 
-        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
-        {
-            base.OnCreateOptionsMenu(menu, inflater);
+			PictureUtils.CleanImageView (photoView);
+		}
 
-            inflater.Inflate(Resource.Menu.menu_list_item_crime_fragment, menu);
-        }
+		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
+		{
+			base.OnCreateOptionsMenu (menu, inflater);
 
-        public override bool OnOptionsItemSelected(IMenuItem item)  // 3
-        {
-            switch (item.ItemId)
-            {
-                case Resource.Id.menu_item_delete_crime_fragment:
+			inflater.Inflate (Resource.Menu.menu_list_item_crime_fragment, menu);
+		}
 
-                    var dialog = new AlertDialog.Builder(Activity)
-                        .SetTitle("Do you want to delete this crime?")
-                        .SetPositiveButton(Android.Resource.String.Ok, delegate
-                        {
-                            CrimeLab.Get(Activity).Remove(crime);
-                            BackToCrimeListActivity();
-                        })
-                        .SetNegativeButton(Android.Resource.String.Cancel, delegate { })
-                        .Show();
+		public override bool OnOptionsItemSelected (IMenuItem item)  // 3
+		{
+			switch (item.ItemId) {
+			case Resource.Id.menu_item_delete_crime_fragment:
 
-                    return true;
-                case Android.Resource.Id.Home:
-                    BackToCrimeListActivity();
+				var dialog = new AlertDialog.Builder (Activity)
+                        .SetTitle ("Do you want to delete this crime?")
+                        .SetPositiveButton (Android.Resource.String.Ok, delegate {
+					CrimeLab.Get (Activity).Remove (crime);
+					BackToCrimeListActivity ();
+				})
+                        .SetNegativeButton (Android.Resource.String.Cancel, delegate {
+				})
+                        .Show ();
+
+				return true;
+			case Android.Resource.Id.Home:
+				BackToCrimeListActivity ();
                     //try
                     //{
                     //    if (NavUtils.ParentActivity != null)  // 检查 MeteData 中是否定义 parent activity
@@ -245,124 +239,122 @@ namespace CriminalIntent
                     //    throw;
                     //}
 
-                    return true;
-                default:
-                    return base.OnOptionsItemSelected(item);
-            }
-        }
+				return true;
+			default:
+				return base.OnOptionsItemSelected (item);
+			}
+		}
 
-        private void BackToCrimeListActivity()
-        {
-            var intent = new Intent(Activity, typeof(CrimeListActivity));
-            intent.AddFlags(ActivityFlags.ClearTop);  // 在 back stack 中查找 CrimeListActivity 实例，并 pop off 其上的 activity
-            StartActivity(intent);
-        }
+		private void BackToCrimeListActivity ()
+		{
+			var intent = new Intent (Activity, typeof(CrimeListActivity));
+			intent.AddFlags (ActivityFlags.ClearTop);  // 在 back stack 中查找 CrimeListActivity 实例，并 pop off 其上的 activity
+			StartActivity (intent);
+		}
 
-        private void ShowDataPickerFragment(int i)
-        {
-            var datePicker = new DatePickerFragment(crime.Date);
+		private void ShowDataPickerFragment (int i)
+		{
+			var datePicker = new DatePickerFragment (crime.Date);
 
-            datePicker.SetTargetFragment(this, i == 0 ? REQUEST_DATE : REQUEST_TIME);  // 实现 Fragment 与 Fragment 之间的回传
-            datePicker.Show(Activity.SupportFragmentManager, i == 0 ? DIALOG_DATE : DIALOG_TIME);
-        }
+			datePicker.SetTargetFragment (this, i == 0 ? REQUEST_DATE : REQUEST_TIME);  // 实现 Fragment 与 Fragment 之间的回传
+			datePicker.Show (Activity.SupportFragmentManager, i == 0 ? DIALOG_DATE : DIALOG_TIME);
+		}
 
-        public override void OnActivityResult(int requestCode, int resultCode, Intent data)
-        {
-            if (resultCode != (int)Result.Ok) return;
+		public override void OnActivityResult (int requestCode, int resultCode, Intent data)
+		{
+			if (resultCode != (int)Result.Ok)
+				return;
 
-            switch (requestCode)
-            {
-                case REQUEST_DATE:
-                    var date = (Date)data.GetSerializableExtra(DatePickerFragment.EXTRA_DATE);
-                    date.Hours = crime.Date.Hours;
-                    date.Minutes = crime.Date.Minutes;
-                    date.Seconds = crime.Date.Seconds;
-                    crime.Date = date;
+			switch (requestCode) {
+			case REQUEST_DATE:
+				var date = (Date)data.GetSerializableExtra (DatePickerFragment.EXTRA_DATE);
+				date.Hours = crime.Date.Hours;
+				date.Minutes = crime.Date.Minutes;
+				date.Seconds = crime.Date.Seconds;
+				crime.Date = date;
                     //crime.Date = date;
-                    UpdateDate();
-                    break;
-                case REQUEST_TIME:
-                    var time = (Date)data.GetSerializableExtra(DatePickerFragment.EXTRA_DATE);
-                    crime.Date.Hours = time.Hours;
-                    crime.Date.Minutes = time.Minutes;
-                    crime.Date.Seconds = 0;
-                    UpdateDate();
-                    break;
-                case REQUEST_PHOTO:
+				UpdateDate ();
+				break;
+			case REQUEST_TIME:
+				var time = (Date)data.GetSerializableExtra (DatePickerFragment.EXTRA_DATE);
+				crime.Date.Hours = time.Hours;
+				crime.Date.Minutes = time.Minutes;
+				crime.Date.Seconds = 0;
+				UpdateDate ();
+				break;
+			case REQUEST_PHOTO:
                     // 删除原始图片
-                    if (crime.CrimePhoto != null)
-                    {
-                        string path = Activity.GetFileStreamPath(crime.CrimePhoto.PhotoName).AbsolutePath;
-                        PictureUtils.DeleteImageFromFile(path);
-                    }
+				if (crime.CrimePhoto != null) {
+					string path = Activity.GetFileStreamPath (crime.CrimePhoto.PhotoName).AbsolutePath;
+					PictureUtils.DeleteImageFromFile (path);
+				}
 
-                    var photoName = data.GetStringExtra(CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
-                    var photo = new Photo(photoName);
-                    crime.CrimePhoto = photo;
-                    ShowPhoto();
-                    break;
-                case REQUEST_CONTACT:
-                    Android.Net.Uri contactUri = data.Data;
-                    string[] queryFields = { ContactsContract.Contacts.InterfaceConsts.DisplayName };
-                    ICursor cursor = Activity.ContentResolver.Query(contactUri, queryFields, null, null, null);
+				var photoName = data.GetStringExtra (CrimeCameraFragment.EXTRA_PHOTO_FILENAME);
+				var photo = new Photo (photoName);
+				crime.CrimePhoto = photo;
+				ShowPhoto ();
+				break;
+			case REQUEST_CONTACT:
+				Android.Net.Uri contactUri = data.Data;
+				string[] queryFields = { ContactsContract.Contacts.InterfaceConsts.DisplayName };
+				ICursor cursor = Activity.ContentResolver.Query (contactUri, queryFields, null, null, null);
 
                     // double-check
-                    if (cursor.Count == 0)
-                    {
-                        cursor.Close();
-                        return;
-                    }
+				if (cursor.Count == 0) {
+					cursor.Close ();
+					return;
+				}
 
-                    cursor.MoveToFirst();
-                    string name = cursor.GetString(cursor.GetColumnIndex(queryFields[0]));
-                    crime.Suspect = name;
-                    suspectButton.Text = name;
-                    cursor.Close();
-                    break;
-                default:
-                    break;
-            }
-        }
+				cursor.MoveToFirst ();
+				string name = cursor.GetString (cursor.GetColumnIndex (queryFields [0]));
+				crime.Suspect = name;
+				suspectButton.Text = name;
+				cursor.Close ();
+				break;
+			default:
+				break;
+			}
+		}
 
-        private void UpdateDate()
-        {
-            dateButton.Text = crime.Date.ToLocaleString();
-        }
+		private void UpdateDate ()
+		{
+			dateButton.Text = crime.Date.ToLocaleString ();
+		}
 
-        public static CrimeFragment NewInstance(UUID crimeId)
-        {
-            var bundle = new Bundle();
-            bundle.PutSerializable(EXTRA_CRIME_ID, crimeId);
+		public static CrimeFragment NewInstance (UUID crimeId)
+		{
+			var bundle = new Bundle ();
+			bundle.PutSerializable (EXTRA_CRIME_ID, crimeId);
 
-            var crimeFragment = new CrimeFragment();
-            crimeFragment.Arguments = bundle;
+			var crimeFragment = new CrimeFragment ();
+			crimeFragment.Arguments = bundle;
 
-            return crimeFragment;
-        }
+			return crimeFragment;
+		}
 
 
-        private string GetCrimeReport()
-        {
-            string solvedString = null;
-            if (crime.Solved)
-                solvedString = GetString(Resource.String.crime_report_solved);
-            else
-                solvedString = GetString(Resource.String.crime_report_unsolved);
+		private string GetCrimeReport ()
+		{
+			string solvedString = null;
+			if (crime.Solved)
+				solvedString = GetString (Resource.String.crime_report_solved);
+			else
+				solvedString = GetString (Resource.String.crime_report_unsolved);
 
-            string dateFormat = "EEE, MMM dd";
-            string dateString = DateFormat.Format(dateFormat, crime.Date).ToString();
+			string dateFormat = "EEE, MMM dd";
+			string dateString = DateFormat.Format (dateFormat, crime.Date).ToString ();
 
-            string suspect = crime.Suspect;
-            if (suspect == null)
-                suspect = GetString(Resource.String.crime_report_no_suspect);
-            else
-                suspect = GetString(Resource.String.crime_report_suspect, suspect);
+			string suspect = crime.Suspect;
+			if (suspect == null)
+				suspect = GetString (Resource.String.crime_report_no_suspect);
+			else
+				suspect = GetString (Resource.String.crime_report_suspect, suspect);
 
-            string report = GetString(Resource.String.crime_report, crime.Title,
-                dateString, solvedString, suspect);
+			string report = GetString (Resource.String.crime_report, crime.Title,
+				                         dateString, solvedString, suspect);
 
-            return report;
-        }
+			return report;
+		}
 
-    }
+	}
 }

@@ -19,8 +19,10 @@ namespace CriminalIntent
     class PictureUtils
     {
         // 缩放图片大小
-        public static BitmapDrawable GetScaledDrawable(Activity activity, string path, bool scale = true)
+		public static async Task<BitmapDrawable> GetScaledDrawableAsync(Activity activity, string path, bool scale = true)
         {
+			try {
+			
             Display display = activity.WindowManager.DefaultDisplay;
             float destWidth = display.Width;
             float destHeight = display.Height;
@@ -28,7 +30,7 @@ namespace CriminalIntent
             // Read in the dimension of the image on disk
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.InJustDecodeBounds = true;  // 这句设置为 true, 下面这行代码不返回 bitmap 实例, 只是设置 options 参数
-            BitmapFactory.DecodeFile(path, options);
+			await BitmapFactory.DecodeFileAsync(path, options).ConfigureAwait(false);
             // 获取原始图片尺寸
             float srcWidth = options.OutWidth;
             float srcHeight = options.OutHeight;
@@ -50,9 +52,16 @@ namespace CriminalIntent
             options = new BitmapFactory.Options();
             options.InSampleSize = inSampleSize;
 
-            Bitmap bitmap = BitmapFactory.DecodeFile(path, options);
+			Bitmap bitmap = await BitmapFactory.DecodeFileAsync(path, options).ConfigureAwait(false);
 
             return new BitmapDrawable(activity.Resources, bitmap);
+
+
+			} catch (Exception ex) {
+				Toast.MakeText (activity, "Pictuire Utisl Error:" + ex.Message, ToastLength.Long).Show ();
+				return null;
+			}
+
         }
 
         // 释放图片资源
@@ -70,7 +79,7 @@ namespace CriminalIntent
         // 删除图片文件
         public static void DeleteImageFromFile(string path)
         {
-            File.Delete(path);
+			File.Delete(path);
         }
     }
 }

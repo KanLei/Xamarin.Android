@@ -143,6 +143,12 @@ namespace CriminalIntent
                 string fileName = Guid.NewGuid().ToString() + ".jpg";
                 try
                 {
+//					string path= System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+//					string filePath = path+"/" + fileName;
+//					using(var fs= new FileStream(filePath,FileMode.Create,FileAccess.Write,FileShare.Read,4096,true))
+//					{
+//						fs.WriteAsync(data,0,data.Length);
+//					}
                     using (Stream stream = activity.OpenFileOutput(fileName, FileCreationMode.Private))
                         await stream.WriteAsync(data, 0, data.Length);
                     var i = new Intent();

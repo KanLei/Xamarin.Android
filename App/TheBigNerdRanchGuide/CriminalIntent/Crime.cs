@@ -13,10 +13,11 @@ using Java.Util;
 
 namespace CriminalIntent
 {
-    [Serializable]
+	[Preserve(AllMembers=true)]
+	[Serializable]
     public class Crime
     {
-        public UUID Id { get; private set; }
+        public UUID Id { get; set; }
         public Date Date { get; set; }
         public string Title { get; set; }
         public bool Solved { get; set; }
@@ -28,12 +29,6 @@ namespace CriminalIntent
             // Generate unique identifier
             Id = UUID.RandomUUID();
             Date = new Date();
-        }
-
-        // 用于 new ArrayAdapter<Crime> 显示合适的 View
-        public override string ToString()
-        {
-            return Title;
         }
     }
 }

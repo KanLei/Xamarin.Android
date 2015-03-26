@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using System.IO;
 using System.Threading.Tasks;
+using Android.Util;
 
 
 namespace CriminalIntent
@@ -30,19 +31,34 @@ namespace CriminalIntent
             this.fileName = fileName;
         }
 
-        public async Task SaveToFileAsync(JavaList<Crime> crimes)
+		public async Task SaveToFileAsync(JavaList<Crime> crimes)
         {
-            Stream stream = context.OpenFileOutput(fileName, FileCreationMode.Private);
-            using (var streamWriter = new StreamWriter(stream))
-            {
-                string result = JsonConvert.SerializeObject(crimes,
-                    Formatting.None,
-                    new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
-                await streamWriter.WriteAsync(result);
-            }
+//			string path= Android.OS.Environment.ExternalStorageDirectory+"/"+fileName;
+//			Stream stream = new FileStream (path, FileMode.OpenOrCreate);
+			Stream stream = context.OpenFileOutput(fileName, FileCreationMode.Private);
+			using (var streamWriter = new StreamWriter (stream)) {
+				string result = JsonConvert.SerializeObject (crimes,
+					new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+				await streamWriter.WriteAsync (result);
+			}
         }
 
-        public JavaList<Crime> ReadFromFile()
+		public JavaList<Crime> ReadFromFile()
+		{
+			Java.IO.File file = context.GetFileStreamPath(fileName);
+			if (file.Exists())
+			{
+				Stream stream = context.OpenFileInput(fileName);
+				using (var streamReader = new StreamReader(stream))
+				{
+					string result = streamReader.ReadToEnd();
+					return JsonConvert.DeserializeObject<JavaList<Crime>> (result) ?? new JavaList<Crime> ();
+				}
+			}
+			return new JavaList<Crime>();
+		}
+
+		public async Task<JavaList<Crime>> ReadFromFileAsync()
         {
             Java.IO.File file = context.GetFileStreamPath(fileName);
             if (file.Exists())
@@ -50,7 +66,7 @@ namespace CriminalIntent
                 Stream stream = context.OpenFileInput(fileName);
                 using (var streamReader = new StreamReader(stream))
                 {
-                    string result = streamReader.ReadToEnd();
+					string result = await streamReader.ReadToEndAsync().ConfigureAwait(false);
 					return JsonConvert.DeserializeObject<JavaList<Crime>> (result) ?? new JavaList<Crime> ();
                 }
             }

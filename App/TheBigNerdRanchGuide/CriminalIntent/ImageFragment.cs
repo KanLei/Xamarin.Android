@@ -31,11 +31,22 @@ namespace CriminalIntent
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             imageView = new ImageView(Activity);
-            var path = Arguments.GetString(EXTRA_IMAGE_PATH);
-            BitmapDrawable image = PictureUtils.GetScaledDrawable(Activity, path, false);
-            imageView.SetImageDrawable(image);
-            return imageView;
+//            var path = ;
+//			BitmapDrawable image;
+//			var task = await PictureUtils.GetScaledDrawableAsync(Activity, Arguments.GetString(EXTRA_IMAGE_PATH), false).ConfigureAwait(false));
+//			imageView.SetImageDrawable (task.Result);
+////            imageView.SetImageDrawable(image);
+//            return imageView;
+
+			imageView.SetImageDrawable (GetBitmap ());
+			return imageView;
         }
+
+		private BitmapDrawable GetBitmap()
+		{
+			Task<BitmapDrawable> task = PictureUtils.GetScaledDrawableAsync(Activity, Arguments.GetString(EXTRA_IMAGE_PATH), false);
+			return task.Result;
+		}
 
         public override void OnDestroy()
         {

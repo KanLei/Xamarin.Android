@@ -10,6 +10,9 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Android.Provider;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace CriminalIntent
 {
@@ -28,9 +31,9 @@ namespace CriminalIntent
 
             //Activity.SetTitle(Resource.String.crimes_title);
             // Create your fragment here
-			JavaList<Crime> crimes = CrimeLab.Get (Activity).Crimes;
 
-            this.ListAdapter = new CrimeAdapter(Activity, crimes);
+			JavaList<Crime> crimes = CrimeLab.Get (Activity).Crimes;
+			ListAdapter = new CrimeAdapter(Activity, crimes);
         }
 
 
@@ -212,16 +215,11 @@ namespace CriminalIntent
                     }
                     mode.Finish();
                     //adapter.NotifyDataSetChanged();  // 在 OnDestroyActionMode 中调用
-                    SaveToFile();   // 更新到文件
+				CrimeLab.Get (Activity).SaveCrimesAsync().ConfigureAwait(false);   // 更新到文件
                     return true;
                 default:
                     return false;
             }
-        }
-
-        private async void SaveToFile()
-        {
-            await CrimeLab.Get(Activity).SaveCrimesAsync().ConfigureAwait(false);
         }
 
         public bool OnCreateActionMode(ActionMode mode, IMenu menu)

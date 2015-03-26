@@ -31,7 +31,7 @@ namespace CriminalIntent
             this.appContext = appContext;
             criminalIntentJson = new CriminalIntentJSONSerializer(appContext, FILE_NAME);
 
-            Crimes = criminalIntentJson.ReadFromFile();
+			Crimes = criminalIntentJson.ReadFromFile();
 
             //var query= Enumerable.Range(0, 2).Select(i => new Crime { Title = "Crime #" + i, Solved = i % 2 == 0 });
             //Crimes.AddRange(query);
@@ -67,11 +67,11 @@ namespace CriminalIntent
             return Crimes.First(c => c.Id.Equals(id));
         }
 
-        public async Task<bool> SaveCrimesAsync()
+		public async Task<bool> SaveCrimesAsync()
         {
             try
             {
-                await criminalIntentJson.SaveToFileAsync(Crimes);
+				await criminalIntentJson.SaveToFileAsync(Crimes).ConfigureAwait(false);
                 return true;
             }
             catch (Exception e)
@@ -80,5 +80,6 @@ namespace CriminalIntent
                 return false;
             }
         }
+
     }
 }

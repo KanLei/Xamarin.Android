@@ -17,22 +17,21 @@ namespace CriminalIntent
 {
     [Activity(Label = "CrimePagerActivity")]
     //[MetaData("android.support.PARENT_ACTIVITY", Value = "criminalintent.CrimeListActivity")]  // 注意项目名小写
-    public class CrimePagerActivity : FragmentActivity
+	public class CrimePagerActivity : FragmentActivity
     {
         private ViewPager viewPager;
         private JavaList<Crime> crimes;
 
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
+			
             viewPager = new ViewPager(this);
             viewPager.Id = Resource.Id.viewPager;
             SetContentView(viewPager);
 
             crimes = CrimeLab.Get(this).Crimes;
-            viewPager.Adapter = new CustomFragmentStatePagerAdapter(SupportFragmentManager, crimes);
+			viewPager.Adapter = new CustomFragmentStatePagerAdapter(SupportFragmentManager, crimes);
             viewPager.PageSelected += (s, e) =>
             {
                 //ActionBar.Title = crimes[e.Position].Title;
@@ -40,13 +39,18 @@ namespace CriminalIntent
             };
 
             var id = (UUID)Intent.GetSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
-            Crime crime = crimes.First(c => c.Id.Equals(id));
-            Title = crime.Title;
 
-            // 用于正确显示第一次加载 ViewPager 中的项
-            var index = new List<Crime>(crimes).FindIndex(c => c.Id.Equals(id));
-            //var index = crimes.FindIndex(c => c.Id.Equals(id));
-            viewPager.SetCurrentItem(index, true);  // 此处会将 index 传入 position
+				Crime crime = (from c in crimes.AsParallel ()
+				               where c.Id.Equals (id)
+					select c).FirstOrDefault();
+
+//            Crime crime = crimes.First(c => c.Id.Equals(id));
+					Title = crime.Title;
+
+					// 用于正确显示第一次加载 ViewPager 中的项
+					var index = new List<Crime> (crimes).FindIndex (c => c.Id.Equals (id));
+					//var index = crimes.FindIndex(c => c.Id.Equals(id));
+					viewPager.SetCurrentItem (index, true);  // 此处会将 index 传入 position
         }
     }
 
@@ -55,7 +59,7 @@ namespace CriminalIntent
     {
         private JavaList<Crime> crimes;
 
-        public CustomFragmentStatePagerAdapter(Android.Support.V4.App.FragmentManager fm, JavaList<Crime> crimes)
+		public CustomFragmentStatePagerAdapter(Android.Support.V4.App.FragmentManager fm, JavaList<Crime> crimes)
             : base(fm)
         {
             this.crimes = crimes;
