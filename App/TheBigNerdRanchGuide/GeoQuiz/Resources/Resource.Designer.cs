@@ -56,9 +56,6 @@ namespace GeoQuiz
 			// aapt resource value: 0x7f020003
 			public const int Icon = 2130837507;
 			
-			// aapt resource value: 0x7f020004
-			public const int monoandroidsplash = 2130837508;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -72,32 +69,32 @@ namespace GeoQuiz
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060000
-			public const int answerTextView = 2131099648;
+			// aapt resource value: 0x7f050000
+			public const int answerTextView = 2131034112;
 			
-			// aapt resource value: 0x7f060002
-			public const int api_level_textview = 2131099650;
+			// aapt resource value: 0x7f050002
+			public const int api_level_textview = 2131034114;
 			
-			// aapt resource value: 0x7f060006
-			public const int cheat_button = 2131099654;
+			// aapt resource value: 0x7f050006
+			public const int cheat_button = 2131034118;
 			
-			// aapt resource value: 0x7f060005
-			public const int false_button = 2131099653;
+			// aapt resource value: 0x7f050005
+			public const int false_button = 2131034117;
 			
-			// aapt resource value: 0x7f060008
-			public const int next_button = 2131099656;
+			// aapt resource value: 0x7f050008
+			public const int next_button = 2131034120;
 			
-			// aapt resource value: 0x7f060007
-			public const int previous_button = 2131099655;
+			// aapt resource value: 0x7f050007
+			public const int previous_button = 2131034119;
 			
-			// aapt resource value: 0x7f060001
-			public const int showAnswerButton = 2131099649;
+			// aapt resource value: 0x7f050001
+			public const int showAnswerButton = 2131034113;
 			
-			// aapt resource value: 0x7f060004
-			public const int true_button = 2131099652;
+			// aapt resource value: 0x7f050004
+			public const int true_button = 2131034116;
 			
-			// aapt resource value: 0x7f060003
-			public const int txtQuestion = 2131099651;
+			// aapt resource value: 0x7f050003
+			public const int txtQuestion = 2131034115;
 			
 			static Id()
 			{
@@ -185,22 +182,6 @@ namespace GeoQuiz
 			}
 			
 			private String()
-			{
-			}
-		}
-		
-		public partial class Style
-		{
-			
-			// aapt resource value: 0x7f050000
-			public const int Mono_Android_Theme_Splash = 2131034112;
-			
-			static Style()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Style()
 			{
 			}
 		}

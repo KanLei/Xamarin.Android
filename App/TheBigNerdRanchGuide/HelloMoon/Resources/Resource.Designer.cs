@@ -50,9 +50,6 @@ namespace HelloMoon
 			// aapt resource value: 0x7f020001
 			public const int Icon = 2130837505;
 			
-			// aapt resource value: 0x7f020002
-			public const int monoandroidsplash = 2130837506;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -66,23 +63,23 @@ namespace HelloMoon
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f070000
-			public const int helloMoonFragment = 2131165184;
+			// aapt resource value: 0x7f060000
+			public const int helloMoonFragment = 2131099648;
 			
-			// aapt resource value: 0x7f070004
-			public const int hellomoon_pauseButton = 2131165188;
+			// aapt resource value: 0x7f060004
+			public const int hellomoon_pauseButton = 2131099652;
 			
-			// aapt resource value: 0x7f070003
-			public const int hellomoon_playButton = 2131165187;
+			// aapt resource value: 0x7f060003
+			public const int hellomoon_playButton = 2131099651;
 			
-			// aapt resource value: 0x7f070005
-			public const int hellomoon_stopButton = 2131165189;
+			// aapt resource value: 0x7f060005
+			public const int hellomoon_stopButton = 2131099653;
 			
-			// aapt resource value: 0x7f070002
-			public const int imageView1 = 2131165186;
+			// aapt resource value: 0x7f060002
+			public const int imageView1 = 2131099650;
 			
-			// aapt resource value: 0x7f070001
-			public const int tableLayout1 = 2131165185;
+			// aapt resource value: 0x7f060001
+			public const int tableLayout1 = 2131099649;
 			
 			static Id()
 			{
@@ -153,22 +150,6 @@ namespace HelloMoon
 			}
 			
 			private String()
-			{
-			}
-		}
-		
-		public partial class Style
-		{
-			
-			// aapt resource value: 0x7f060000
-			public const int Mono_Android_Theme_Splash = 2131099648;
-			
-			static Style()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Style()
 			{
 			}
 		}

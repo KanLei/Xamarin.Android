@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("NerdLauncher.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("DragAndDraw.Resource", IsApplication=true)]
 
-namespace NerdLauncher
+namespace DragAndDraw
 {
 	
 	
@@ -60,14 +60,11 @@ namespace NerdLauncher
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int appIconImageView = 2131034113;
-			
-			// aapt resource value: 0x7f050002
-			public const int appNameTextView = 2131034114;
-			
 			// aapt resource value: 0x7f050000
 			public const int fragmentContainer = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int myBoxDrawView = 2131034113;
 			
 			static Id()
 			{
@@ -86,7 +83,7 @@ namespace NerdLauncher
 			public const int activity_fragment = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int app_list_item = 2130903041;
+			public const int fragment_drag_and_draw = 2130903041;
 			
 			static Layout()
 			{

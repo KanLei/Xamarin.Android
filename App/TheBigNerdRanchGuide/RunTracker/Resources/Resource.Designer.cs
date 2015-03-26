@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("NerdLauncher.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("RunTracker.Resource", IsApplication=true)]
 
-namespace NerdLauncher
+namespace RunTracker
 {
 	
 	
@@ -60,14 +60,29 @@ namespace NerdLauncher
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int appIconImageView = 2131034113;
-			
-			// aapt resource value: 0x7f050002
-			public const int appNameTextView = 2131034114;
-			
 			// aapt resource value: 0x7f050000
 			public const int fragmentContainer = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int run_altitudeTextView = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int run_durationTextView = 2131034117;
+			
+			// aapt resource value: 0x7f050002
+			public const int run_latitudeTextView = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int run_longitudeTextView = 2131034115;
+			
+			// aapt resource value: 0x7f050006
+			public const int run_startButton = 2131034118;
+			
+			// aapt resource value: 0x7f050001
+			public const int run_startedTextView = 2131034113;
+			
+			// aapt resource value: 0x7f050007
+			public const int run_stopButton = 2131034119;
 			
 			static Id()
 			{
@@ -86,7 +101,7 @@ namespace NerdLauncher
 			public const int activity_fragment = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int app_list_item = 2130903041;
+			public const int fragment_run = 2130903041;
 			
 			static Layout()
 			{
@@ -106,6 +121,36 @@ namespace NerdLauncher
 			
 			// aapt resource value: 0x7f040000
 			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040005
+			public const int altitude = 2130968581;
+			
+			// aapt resource value: 0x7f04000b
+			public const int cell_text = 2130968587;
+			
+			// aapt resource value: 0x7f040006
+			public const int elapsed_time = 2130968582;
+			
+			// aapt resource value: 0x7f04000a
+			public const int gps_disabled = 2130968586;
+			
+			// aapt resource value: 0x7f040009
+			public const int gps_enabled = 2130968585;
+			
+			// aapt resource value: 0x7f040003
+			public const int latitude = 2130968579;
+			
+			// aapt resource value: 0x7f040004
+			public const int longitude = 2130968580;
+			
+			// aapt resource value: 0x7f040007
+			public const int start = 2130968583;
+			
+			// aapt resource value: 0x7f040002
+			public const int started = 2130968578;
+			
+			// aapt resource value: 0x7f040008
+			public const int stop = 2130968584;
 			
 			static String()
 			{
