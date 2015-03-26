@@ -28,7 +28,7 @@ namespace CriminalIntent
 
             //Activity.SetTitle(Resource.String.crimes_title);
             // Create your fragment here
-            JavaList<Crime> crimes = CrimeLab.Get(Activity).Crimes;
+			JavaList<Crime> crimes = CrimeLab.Get (Activity).Crimes;
 
             this.ListAdapter = new CrimeAdapter(Activity, crimes);
         }

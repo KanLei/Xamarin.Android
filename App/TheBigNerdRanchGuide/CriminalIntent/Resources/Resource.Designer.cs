@@ -1101,9 +1101,6 @@ namespace CriminalIntent
 			// aapt resource value: 0x7f020034
 			public const int Icon = 2130837556;
 			
-			// aapt resource value: 0x7f020035
-			public const int monoandroidsplash = 2130837557;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -1973,9 +1970,6 @@ namespace CriminalIntent
 			
 			// aapt resource value: 0x7f0b0060
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131427424;
-			
-			// aapt resource value: 0x7f0b00eb
-			public const int Mono_Android_Theme_Splash = 2131427563;
 			
 			// aapt resource value: 0x7f0b0061
 			public const int Platform_AppCompat = 2131427425;

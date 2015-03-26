@@ -51,7 +51,7 @@ namespace CriminalIntent
                 using (var streamReader = new StreamReader(stream))
                 {
                     string result = streamReader.ReadToEnd();
-                    return JsonConvert.DeserializeObject<JavaList<Crime>>(result);
+					return JsonConvert.DeserializeObject<JavaList<Crime>> (result) ?? new JavaList<Crime> ();
                 }
             }
             return new JavaList<Crime>();
