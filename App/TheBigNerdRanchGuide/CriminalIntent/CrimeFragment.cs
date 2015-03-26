@@ -150,12 +150,16 @@ namespace CriminalIntent
                 photoButton.Enabled = false;
 
             // If activities available
-            IList<ResolveInfo> resolvers = pm.QueryIntentActivities(new Intent(Intent.ActionPick, ContactsContract.Contacts.ContentUri), 0);
-            suspectButton.Enabled = resolvers.Count > 0;
-            var intent = new Intent(Intent.ActionSend);
-            intent.SetType("text/plain");
-            resolvers = pm.QueryIntentActivities(intent, 0);
-            reportButton.Enabled = resolvers.Count > 0;
+//            IList<ResolveInfo> resolvers = pm.QueryIntentActivities(new Intent(Intent.ActionPick, ContactsContract.Contacts.ContentUri), 0);
+//            suspectButton.Enabled = resolvers.Count > 0;
+			var contactsIntent = new Intent (Intent.ActionPick, ContactsContract.Contacts.ContentUri);
+			suspectButton.Enabled = contactsIntent.ResolveActivity (pm) != null ? true : false;
+            var sendIntent = new Intent(Intent.ActionSend);
+			sendIntent.SetType("text/plain");
+//            resolvers = pm.QueryIntentActivities(intent, 0);
+//            reportButton.Enabled = resolvers.Count > 0;
+			// 这种查询方式更优
+			reportButton.Enabled = sendIntent.ResolveActivity (pm) != null ? true : false;
             return v;
         }
 
