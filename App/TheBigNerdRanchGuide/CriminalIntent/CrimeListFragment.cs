@@ -32,8 +32,11 @@ namespace CriminalIntent
             //Activity.SetTitle(Resource.String.crimes_title);
             // Create your fragment here
 
-			JavaList<Crime> crimes = CrimeLab.Get (Activity).Crimes;
-			ListAdapter = new CrimeAdapter(Activity, crimes);
+			Task.Run (() => {
+				JavaList<Crime> crimes = CrimeLab.Get (Activity).Crimes;
+				//Thread.Sleep(3000);
+				Activity.RunOnUiThread(()=> ListAdapter = new CrimeAdapter (Activity, crimes));
+			});
         }
 
 
@@ -48,8 +51,8 @@ namespace CriminalIntent
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View v = base.OnCreateView(inflater, container, savedInstanceState);
-
+//            View v = base.OnCreateView(inflater, container, savedInstanceState);
+			View v = inflater.Inflate(Resource.Layout.fragment_crime_list, container,false);
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Honeycomb && subtitileVisible)
             {
                 Activity.ActionBar.SetSubtitle(Resource.String.subtitle);
@@ -74,7 +77,7 @@ namespace CriminalIntent
                 };
             }
 
-            return v;
+			return v;
         }
 
         #region Option Menu
@@ -183,8 +186,7 @@ namespace CriminalIntent
 
             public override View GetView(int position, View convertView, ViewGroup parent)
             {
-                if (convertView == null)
-                    convertView = activity.LayoutInflater.Inflate(Resource.Layout.list_item_crime, null, false);
+				convertView = convertView ?? activity.LayoutInflater.Inflate(Resource.Layout.list_item_crime, null, false);
 
                 Crime crime = GetItem(position);
                 var titleTextView = convertView.FindViewById<TextView>(Resource.Id.crime_list_item_titleTextView);

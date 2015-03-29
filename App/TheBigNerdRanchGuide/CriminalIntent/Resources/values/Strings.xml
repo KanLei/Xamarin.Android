@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="ApplicationName">CriminalIntent</string>
+<string name="loading">Loading</string>
   <string name="crime_title_hint">Enter a title for the crime.</string>
   <string name="crime_title_label">Title</string>
   <string name="crime_details_label">Details</string>
