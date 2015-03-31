@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Feeder</string>
+	<string name="addFeed">Add Feed</string>
+	<string name="feedUrl">Feed Url</string>
+	<string name="addUrl">Add</string>
+</resources>
