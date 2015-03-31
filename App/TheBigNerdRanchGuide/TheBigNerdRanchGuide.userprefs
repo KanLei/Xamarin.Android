@@ -1,16 +1,23 @@
 ﻿<Properties GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.Tablet" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CriminalIntent\CrimeListFragment.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 4 (KitKat)" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="PhotoGallery\StartupReceiver.cs">
     <Files>
-      <File FileName="CriminalIntent\Resources\values\Strings.xml" Line="22" Column="22" />
-      <File FileName="CriminalIntent\CrimePagerActivity.cs" Line="1" Column="1" />
-      <File FileName="CriminalIntent\CrimeFragment.cs" Line="28" Column="28" />
-      <File FileName="CriminalIntent\CrimeListFragment.cs" Line="81" Column="81" />
+      <File FileName="PhotoGallery\PhotoGalleryActivity.cs" Line="35" Column="35" />
+      <File FileName="PhotoGallery\PhotoGalleryFragment.cs" Line="37" Column="37" />
+      <File FileName="PhotoGallery\Resources\xml\searchable.xml" Line="38" Column="38" />
+      <File FileName="PhotoGallery\FlickrFetchr.cs" Line="22" Column="22" />
+      <File FileName="PhotoGallery\Resources\menu\fragment_photo_gallery.xml" Line="3" Column="3" />
+      <File FileName="PhotoGallery\PollService.cs" Line="12" Column="12" />
+      <File FileName="PhotoGallery\Resources\values\Strings.xml" Line="81" Column="81" />
+      <File FileName="CriminalIntent\Resources\menu\menu_list_item_crime.xml" Line="29" Column="29" />
+      <File FileName="PhotoGallery\StartupReceiver.cs" Line="23" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="D:\GitHub\Xamarin.Android\App\TheBigNerdRanchGuide\CriminalIntent\CrimeListFragment.cs" line="54" column="1" />
+      <Breakpoint file="D:\GitHub\Xamarin.Android\App\TheBigNerdRanchGuide\PhotoGallery\PhotoGalleryFragment.cs" line="121" column="1" />
+      <Breakpoint file="D:\GitHub\Xamarin.Android\App\TheBigNerdRanchGuide\PhotoGallery\PhotoGalleryActivity.cs" line="33" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
@@ -21,5 +28,6 @@
     <Watch file="d:\GitHub\Xamarin.Android\App\TheBigNerdRanchGuide\CriminalIntent\CrimeLab.cs" line="24" offsetX="536" offsetY="437" expression="this.Crimes" liveUpdate="False" />
     <Watch file="d:\GitHub\Xamarin.Android\App\TheBigNerdRanchGuide\CriminalIntent\CrimeLab.cs" line="24" offsetX="536" offsetY="437" expression="this.Crimes" liveUpdate="False" />
   </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.ItemProperties.PhotoGallery MonoForAntroid.PreferredDevice="Nexus 4" />
   <MonoDevelop.Ide.ItemProperties.CriminalIntent MonoForAntroid.PreferredDevice="Nexus 4" />
 </Properties>

@@ -60,11 +60,23 @@ namespace PhotoGallery
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050000
-			public const int fragmentContainer = 2131034112;
+			// aapt resource value: 0x7f070000
+			public const int fragmentContainer = 2131165184;
 			
-			// aapt resource value: 0x7f050001
-			public const int gridView = 2131034113;
+			// aapt resource value: 0x7f070002
+			public const int gallery_item_imageView = 2131165186;
+			
+			// aapt resource value: 0x7f070001
+			public const int gridView = 2131165185;
+			
+			// aapt resource value: 0x7f070004
+			public const int menu_item_clear = 2131165188;
+			
+			// aapt resource value: 0x7f070003
+			public const int menu_item_search = 2131165187;
+			
+			// aapt resource value: 0x7f070005
+			public const int menu_item_toggle_polling = 2131165189;
 			
 			static Id()
 			{
@@ -85,6 +97,9 @@ namespace PhotoGallery
 			// aapt resource value: 0x7f030001
 			public const int fragment_photo_gallery = 2130903041;
 			
+			// aapt resource value: 0x7f030002
+			public const int gallery_item = 2130903042;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -95,14 +110,51 @@ namespace PhotoGallery
 			}
 		}
 		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int fragment_photo_gallery = 2131099648;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int ApplicationName = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int Hello = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int clear_search = 2131034116;
+			
+			// aapt resource value: 0x7f050008
+			public const int new_pictures_text = 2131034120;
+			
+			// aapt resource value: 0x7f050007
+			public const int new_pictures_title = 2131034119;
+			
+			// aapt resource value: 0x7f050003
+			public const int search = 2131034115;
+			
+			// aapt resource value: 0x7f050002
+			public const int search_hint = 2131034114;
+			
+			// aapt resource value: 0x7f050005
+			public const int start_polling = 2131034117;
+			
+			// aapt resource value: 0x7f050006
+			public const int stop_polling = 2131034118;
 			
 			static String()
 			{
@@ -110,6 +162,22 @@ namespace PhotoGallery
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Xml
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int searchable = 2130968576;
+			
+			static Xml()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Xml()
 			{
 			}
 		}

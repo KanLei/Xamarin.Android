@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Threading.Tasks;
+using Android.Preferences;
 
 namespace PhotoGallery
 {
@@ -35,15 +36,21 @@ namespace PhotoGallery
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Add("method", METHOD_GET_RECENT);
-                client.DefaultRequestHeaders.Add("api_key", API_KEY);
-                client.DefaultRequestHeaders.Add(PARAM_EXTRAS, EXTRA_SMALL_URL);
+//                client.DefaultRequestHeaders.Add("method", METHOD_GET_RECENT);
+//                client.DefaultRequestHeaders.Add("api_key", API_KEY);
+//                client.DefaultRequestHeaders.Add(PARAM_EXTRAS, EXTRA_SMALL_URL);
                 return await client.GetByteArrayAsync(requestUrl).ConfigureAwait(false);
             }
         }
 
         public async Task<string> GetStringAsync(string requestUrl)
         {
+
+//			string query = PreferenceManager.GetDefaultSharedPreferences (this).GetString ("pref_search_query", null);
+//			if (query != null) {
+//
+//			}
+
             using (var client = new HttpClient())
             {
                 return await client.GetStringAsync(requestUrl).ConfigureAwait(false);

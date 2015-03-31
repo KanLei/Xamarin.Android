@@ -83,7 +83,7 @@ Global
 		{ED3AA9A6-C743-4A56-AE8C-65FEA95F6A49}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = CriminalIntent\CriminalIntent.csproj
+		StartupItem = PhotoGallery\PhotoGallery.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

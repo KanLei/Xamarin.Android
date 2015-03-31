@@ -14,6 +14,7 @@ using Android.Widget;
 namespace PhotoGallery
 {
 	[BroadcastReceiver]
+	[IntentFilter(new string[]{"android.intent.action.BOOT_COMPLETED"})]
 	public class StartupReceiver : BroadcastReceiver
 	{
 		public override void OnReceive (Context context, Intent intent)

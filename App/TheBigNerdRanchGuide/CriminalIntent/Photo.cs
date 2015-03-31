@@ -28,6 +28,5 @@ namespace CriminalIntent
         {
             this.PhotoName = photoName;
         }
-
     }
 }

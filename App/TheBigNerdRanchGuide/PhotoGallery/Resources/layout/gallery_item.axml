@@ -1,8 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-</LinearLayout>
-
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:src="@android:drawable/ic_menu_gallery"
+    p1:layout_width="match_parent"
+    p1:layout_height="120dp"
+    p1:id="@+id/gallery_item_imageView"
+    p1:scaleType="centerCrop" />
