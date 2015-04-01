@@ -18,15 +18,27 @@ namespace Feeder
 	{
 		public const string RSSFEEDINDEX = "RssFeed_Index";
 
+		private RssFeed rssFeed;
+
+		private bool autoUpdate;
 		private int index;
+
+		public static FeedListItemFragment NewInstance(int index)
+		{
+			var feedListItemFragment = new FeedListItemFragment ();
+			var bundle = new Bundle ();
+			bundle.PutInt ("key_index", index);
+			feedListItemFragment.Arguments = bundle;
+			return feedListItemFragment;
+		}
 
 		public override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
 			RetainInstance = true;
+			SetHasOptionsMenu (true);
 		}
-
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -36,31 +48,67 @@ namespace Feeder
 			listView.ItemClick += (sender, e) => {
 
 			 	RssItem rssItem = ((FeedListItemAdapter)(listView.Adapter)).GetItem(e.Position);
-				var uri= Android.Net.Uri.Parse(rssItem.Link);
-				var intent = new Intent(Intent.ActionView, uri);
-				StartActivity(intent);
-			};
+//				var uri= Android.Net.Uri.Parse(rssItem.Link);
+//				var intent = new Intent(Intent.ActionView, uri);
+//				StartActivity(intent);
 
+				var intent = new Intent(Activity, typeof(PostPageActivity));
+				intent.PutExtra(PostPageFragment.WEBVIEW_URL,rssItem.Link); 
+				StartActivity(intent);
+
+			};
 
 			index = Arguments.GetInt ("key_index");
 
-			RssFeed rssFeed = RssFeedLab.Get ().RssFeeds [index];
+			 rssFeed = RssFeedLab.Get ().RssFeeds [index];
 			Activity.Title = rssFeed.Name;
 
 			listView.Adapter = new FeedListItemAdapter (Activity, rssFeed.Items);
 
 			return v;
-
 		}
 
-
-		public static FeedListItemFragment NewInstance(int index)
+		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
 		{
-			var feedListItemFragment = new FeedListItemFragment ();
-			var bundle = new Bundle ();
-			bundle.PutInt ("key_index", index);
-			feedListItemFragment.Arguments = bundle;
-			return feedListItemFragment;
+			base.OnCreateOptionsMenu (menu, inflater);
+			inflater.Inflate (Resource.Menu.menu_feed_list_item, menu);
+		}
+
+		public override void OnPrepareOptionsMenu (IMenu menu)
+		{
+			base.OnPrepareOptionsMenu (menu);
+
+			IMenuItem menuItem = menu.FindItem (Resource.Id.updateFeedItemMenu);
+			if (menuItem != null) {
+				if (autoUpdate) {
+					menuItem.SetIcon (Resource.Drawable.btn_check_on);
+					if (!PollService.IsServiceAlarmOn (Activity))
+						PollService.SetServiceAlarm (Activity, true, index, rssFeed.Url);
+				} else {
+					menuItem.SetIcon (Resource.Drawable.btn_check_off);
+					if (PollService.IsServiceAlarmOn (Activity))
+						PollService.SetServiceAlarm (Activity, false);
+				}
+			}
+		}
+
+		public override bool OnOptionsItemSelected (IMenuItem item)
+		{
+			switch (item.ItemId) {
+			case Resource.Id.updateFeedItemMenu:
+				autoUpdate = !autoUpdate;
+				Activity.InvalidateOptionsMenu ();
+				return true;
+			default:
+				return base.OnOptionsItemSelected (item);
+			}
+		}
+
+		public override void OnDestroy ()
+		{
+			base.OnDestroy ();
+			if (PollService.IsServiceAlarmOn (Activity))
+				PollService.SetServiceAlarm (Activity, false);
 		}
 
 

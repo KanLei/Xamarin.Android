@@ -8,9 +8,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/feedListView" />
-    <Button
-        android:text="@string/addFeed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addFeedButton" />
 </LinearLayout>

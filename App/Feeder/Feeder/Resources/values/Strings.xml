@@ -4,4 +4,5 @@
 	<string name="addFeed">Add Feed</string>
 	<string name="feedUrl">Feed Url</string>
 	<string name="addUrl">Add</string>
+	<string name="autoUpdate">Auto Udpate</string>
 </resources>

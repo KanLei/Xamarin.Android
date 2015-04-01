@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
 using System.Xml.Linq;
 
 using Android.App;
@@ -19,9 +18,16 @@ namespace Feeder
 {
 	public class FeedListFragment : Fragment
 	{
-		private const int REQUESTCODE=0;
+		private const int REQUESTCODE = 0;
 
 		private ListView listView;
+
+		public override void OnCreate (Bundle savedInstanceState)
+		{
+			base.OnCreate (savedInstanceState);
+
+			SetHasOptionsMenu (true);
+		}
 
 		public override View OnCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
@@ -34,88 +40,52 @@ namespace Feeder
 				StartActivity(intent);
 			};
 
-
-			var addFeedButton = v.FindViewById<Button> (Resource.Id.addFeedButton);
-			addFeedButton.Click += (sender, e) => {
-				var intent = new Intent(Activity,typeof(AddFeedActivity));
-				StartActivityForResult(intent,REQUESTCODE);
-			};
-
 			UpdateListView ();
 
 			return v;
 		}
 
+		public override void OnCreateOptionsMenu (IMenu menu, MenuInflater inflater)
+		{
+			base.OnCreateOptionsMenu (menu, inflater);
+			inflater.Inflate (Resource.Menu.menu_feed_list, menu);
+		}
+
+
+		public override bool OnOptionsItemSelected (IMenuItem item)
+		{
+			switch (item.ItemId) {
+			case Resource.Id.addFeedMenu:
+				var intent = new Intent (Activity, typeof(AddFeedActivity));
+				StartActivityForResult (intent, REQUESTCODE);
+				return true;
+			default:
+				return base.OnOptionsItemSelected (item);
+			}
+		}
 
 		public override async void OnActivityResult (int requestCode, Result resultCode, Intent data)
 		{
-			if (resultCode == Result.Ok && requestCode == REQUESTCODE) {
-				string url= data.GetStringExtra (AddFeedFragment.URL);
-				if (String.IsNullOrWhiteSpace (url))
-					return;
-
-				if (!url.Contains ("http://")) {
-					url = "http://" + url;
-				}
-
-				string content= await GetStringAsync(url);
-				ParseXmlContent (content);
-
-
-			}
-
-			base.OnActivityResult (requestCode, resultCode, data);
-		}
-
-		private async Task<string> GetStringAsync(string url)
-		{
-			using(var client = new HttpClient())
-			{
-				return await client.GetStringAsync (url);
-			}
-		}
-
-		private void ParseXmlContent(string content)
-		{
-			XDocument doc= XDocument.Parse (content);
-			XElement element= doc.Descendants ("channel").FirstOrDefault ();
-			if (element != null) {
-				string title= element.Element ("title").Value;
-
-				var rssFeed = new RssFeed (title);
-
-				rssFeed.Items = (from item in doc.Descendants ("item")
-				                 select new RssItem () {
-						Title = item.Element ("title").Value,
-						Link = item.Element ("link").Value,
-						PubDate = item.Element ("pubDate").Value,
-					Creator = GetCreator (item)
-				}).ToList ();
-
-				RssFeedLab.Get ().RssFeeds.Add (rssFeed);
-				UpdateListView ();
-			}
-		}
-
-		private string GetCreator(XElement item)
-		{
-			string author = string.Empty;
-			XNamespace dc = "http://purl.org/dc/elements/1.1/";
-			try
-			{
-				author = item.Element("author")==null?null:item.Element("author").Value;
-				if (author == null)
-				{
-					author = item.Element(dc + "creator").Value;
+			if (resultCode == Result.Ok) {
+				switch (requestCode) {
+				case REQUESTCODE:
+					string url = data.GetStringExtra (AddFeedFragment.URL);
+					if (String.IsNullOrWhiteSpace (url))
+						return;
+					RssFeed rssFeed = await ParseXMLContent.GetRssFeedsAsync (url);
+					if (rssFeed != null) {
+						RssFeedLab.Get ().RssFeeds.Add (rssFeed);
+						UpdateListView ();
+					}
+					
+					break;
+				default:
+					base.OnActivityResult (requestCode, resultCode, data);
+					break;
 				}
 			}
-			catch (Exception ex)
-			{
-				Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
-			}
-
-			return author;
 		}
+
 
 		private void UpdateListView()
 		{

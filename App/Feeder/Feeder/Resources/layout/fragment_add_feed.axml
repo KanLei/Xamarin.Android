@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/urlEditText"
-        android:hint="blog.xamarin.com/feed/" />
+        android:hint="blog.xamarin.com/feed/"
+        android:text="blog.xamarin.com/feed/" />
     <Button
         android:text="@string/addUrl"
         android:layout_width="match_parent"

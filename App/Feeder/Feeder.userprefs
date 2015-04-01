@@ -1,35 +1,27 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.Nexus 4 (KitKat)" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Feeder\FeedListItemFragment.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="Android.01bdb30a17069737" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs">
     <Files>
-      <File FileName="Feeder\AddFeedActivity.cs" Line="38" Column="38" />
-      <File FileName="Feeder\SingleFragmentActivity.cs" Line="55" Column="55" />
-      <File FileName="Feeder\AddFeedFragment.cs" Line="4" Column="4" />
-      <File FileName="Feeder\FeedListActivity.cs" Line="1" Column="1" />
-      <File FileName="Feeder\FeedListFragment.cs" Line="27" Column="27" />
-      <File FileName="Feeder\RssFeed.cs" Line="31" Column="31" />
-      <File FileName="Feeder\RssItem.cs" Line="26" Column="26" />
-      <File FileName="Feeder\FeedListAdapter.cs" Line="56" Column="56" />
-      <File FileName="Feeder\FeedListItemActivity.cs" Line="67" Column="67" />
-      <File FileName="Feeder\FeedListItemFragment.cs" Line="20" Column="20" />
-      <File FileName="Feeder\RssFeedLab.cs" Line="25" Column="25" />
+      <File FileName="Feeder\FeedListItemFragment.cs" Line="1" Column="1" />
+      <File FileName="Feeder\PostPageFragment.cs" Line="1" Column="1" />
+      <File FileName="Feeder\PostPageActivity.cs" Line="1" Column="1" />
+      <File FileName="Feeder\FeedListFragment.cs" Line="1" Column="1" />
+      <File FileName="Feeder\AddFeedFragment.cs" Line="1" Column="1" />
+      <File FileName="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs" Line="26" Column="26" />
+      <File FileName="Feeder\PollService.cs" Line="1" Column="1" />
+      <File FileName="Feeder\AddFeedActivity.cs" Line="1" Column="1" />
+      <File FileName="Feeder\StartupReceiver.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Feeder" expanded="True">
-            <Node name="Resources" expanded="True">
-              <Node name="layout" expanded="True" />
-            </Node>
-            <Node name="FeedListItemFragment.cs" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs" line="86" column="1" />
+      <Breakpoint file="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs" line="26" column="1" />
+      <Breakpoint file="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs" line="37" column="1" />
+      <Breakpoint file="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs" line="44" column="1" />
+      <Breakpoint file="d:\Xamarin Project\Feeder\Feeder\ParseXMLContent.cs" line="101" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Feeder MonoForAntroid.PreferredDevice="Nexus 4" />
+  <MonoDevelop.Ide.ItemProperties.Feeder MonoForAntroid.PreferredDevice="Nexus 4" MonoForAntroid.PreferredTheme="Theme.Material.Light" />
 </Properties>

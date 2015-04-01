@@ -15,7 +15,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AssemblyName>Feeder</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,21 +38,18 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ModernHttpClient.Android">
+      <HintPath>C:\Users\LEI\Downloads\ModernHttpClient-0.5\Monoandroid\ModernHttpClient.Android.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.21.0.3.0\lib\MonoAndroid10\Xamarin.Android.Support.v4.dll</HintPath>
+    <Reference Include="OkHttp">
+      <HintPath>C:\Users\LEI\Downloads\ModernHttpClient-0.5\Monoandroid\OkHttp.dll</HintPath>
     </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.CardView">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.21.0.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
-      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.21.0.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
@@ -68,9 +65,13 @@
     <Compile Include="FeedListItemActivity.cs" />
     <Compile Include="FeedListItemFragment.cs" />
     <Compile Include="RssFeedLab.cs" />
+    <Compile Include="ParseXMLContent.cs" />
+    <Compile Include="PollService.cs" />
+    <Compile Include="StartupReceiver.cs" />
+    <Compile Include="PostPageActivity.cs" />
+    <Compile Include="PostPageFragment.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -82,7 +83,13 @@
     <AndroidResource Include="Resources\layout\fragment_add_feed.axml" />
     <AndroidResource Include="Resources\layout\fragment_feed_list.axml" />
     <AndroidResource Include="Resources\layout\fragment_feed_list_item.axml" />
+    <AndroidResource Include="Resources\menu\menu_feed_list.xml" />
+    <AndroidResource Include="Resources\menu\menu_feed_list_item.xml" />
+    <AndroidResource Include="Resources\drawable\btn_check_off.png" />
+    <AndroidResource Include="Resources\drawable\btn_check_on.png" />
+    <AndroidResource Include="Resources\layout\fragment_post_page.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup />
 </Project>

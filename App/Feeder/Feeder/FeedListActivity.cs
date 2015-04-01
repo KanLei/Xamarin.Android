@@ -10,10 +10,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Content.PM;
+using Android.Content.Res;
 
 namespace Feeder
 {
-	[Activity (Label = "FeedListActivity", MainLauncher=true)]			
+	[Activity (Label = "FeedList", MainLauncher=true)]			
 	public class FeedListActivity : SingleFragmentActivity
 	{
 		#region implemented abstract members of SingleFragmentActivity
