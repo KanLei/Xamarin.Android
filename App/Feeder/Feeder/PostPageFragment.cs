@@ -89,10 +89,10 @@ namespace Feeder
 				}
 			}
 
-			public override void OnReceivedTitle (WebView view, string title)
-			{
-				mActivity.ActionBar.Title = title;
-			}
+//			public override void OnReceivedTitle (WebView view, string title)
+//			{
+//				mActivity.ActionBar.Title = title;
+//			}
 		}
 	}
 }
